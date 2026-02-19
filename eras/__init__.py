@@ -7,6 +7,10 @@ from . import broadcast
 from . import victory
 from . import bunker
 from . import expansion
+from . import dark
+from . import wanderer
+from . import liberation
+from . import underground
 from . import endings
 
 __all__ = [
@@ -16,5 +20,9 @@ __all__ = [
     'victory',
     'bunker',
     'expansion',
+    'dark',
+    'wanderer',
+    'liberation',
+    'underground',
     'endings'
 ]

@@ -97,20 +97,29 @@ def deterrence_era_3(game):
 绝地反击】即使没有希望也要战斗
 等待奇迹】相信逃亡的战舰会带来转机
 多线准备】在各个方向都留下希望""")
-    game.add_button("选择1", lambda: game.choice(5, 0, 0, 0, 0, game.check_victory_path))
-    game.add_button("选择2", lambda: game.choice(0, 5, 0, 0, 0, game.check_victory_path))
-    game.add_button("选择3", lambda: game.choice(0, 0, 5, 0, 0, game.check_victory_path))
-    game.add_button("选择4", lambda: game.choice(0, 0, 0, 5, 0, game.check_victory_path))
-    game.add_button("选择5", lambda: game.choice(0, 0, 0, 0, 5, game.check_victory_path))
-    game.add_button("选择6", lambda: game.choice(2, 2, 2, 0, 0, game.check_victory_path))
+    game.add_button("选择1", lambda: game.choice(5, 0, 0, 0, 0, check_victory_path))
+    game.add_button("选择2", lambda: game.choice(0, 5, 0, 0, 0, check_victory_path))
+    game.add_button("选择3", lambda: game.choice(0, 0, 5, 0, 0, check_victory_path))
+    game.add_button("选择4", lambda: game.choice(0, 0, 0, 5, 0, check_victory_path))
+    game.add_button("选择5", lambda: game.choice(0, 0, 0, 0, 5, check_victory_path))
+    game.add_button("选择6", lambda: game.choice(2, 2, 2, 0, 0, check_victory_path))
+    game.add_button("选择7【威慑失败】", lambda: game.choice(0, 0, 3, 0, 0, enter_dark_era))
 
 # 检查是否进入胜利纪元（小概率）
 def check_victory_path(game):
     # 条件：科技>20 且 侵略性>15 且 团结度>15
     if game.score['technology'] > 20 and game.score['aggression'] > 15 and game.score['unity'] > 15:
         game.era_path.append('victory')
-        game.victory_era_1()
+        from .victory import victory_era_1
+        victory_era_1(game)
     else:
         game.era_path.append('broadcast')
-        game.broadcast_era_1()
+        from .broadcast import broadcast_era_1
+        broadcast_era_1(game)
+
+def enter_dark_era(game):
+    """进入黑暗纪元"""
+    game.era_path.append('dark')
+    from .dark import dark_era_1
+    dark_era_1(game)
 
